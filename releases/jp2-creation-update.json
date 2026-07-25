@@ -13,7 +13,7 @@
     "buildNumber": 40,
     "required": false,
     "pkgUrl": "https://github.com/jp2creation/hub_apple/releases/download/jp2-creation-mac-v1.38/JP2-Creation-Mac-Installer-1.38.pkg",
-    "sha256": "15d934abf7ef6e91879349d1c6d6111b62e00910e6ca55533449188e025a9435",
+    "sha256": "30d81205fcd6d4a13af24b8856f4ccaf054d35d713da252d88e3d7efc778f495",
     "releaseNotes": "Parametres Mac alignes sur Android avec code app, connexion rapide, localisation native, barre JP2 Création et installation dans Applications."
   }
 }

@@ -48,6 +48,22 @@ npm run mac:pkg
 
 Le paquet est genere dans `build/JP2-Creation-Mac-Installer-<version>.pkg`.
 
+Pour qu'un paquet telecharge depuis GitHub s'ouvre sans alerte Gatekeeper, il doit etre signe et notarise avec un compte Apple Developer. Installer dans le Trousseau les certificats `Developer ID Application` et `Developer ID Installer`, creer un profil notarytool, puis renseigner dans `.env` :
+
+```bash
+JP2_MAC_APP_SIGN_IDENTITY="Developer ID Application: ..."
+JP2_MAC_INSTALLER_SIGN_IDENTITY="Developer ID Installer: ..."
+JP2_NOTARY_KEYCHAIN_PROFILE="jp2-notary"
+```
+
+Le profil notarytool se cree une fois avec :
+
+```bash
+xcrun notarytool store-credentials jp2-notary
+```
+
+Sans ces certificats Apple, le `.pkg` reste utilisable en developpement local, mais macOS peut bloquer son ouverture apres un telechargement depuis Internet.
+
 ## Releases
 
 Les apps Apple lisent le manifest suivant :

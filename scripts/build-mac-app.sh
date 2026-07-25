@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 VERSION="${JP2_APP_VERSION:-1.38}"
 DERIVED_DATA_PATH="${JP2_MAC_DERIVED_DATA:-$ROOT_DIR/build/mac-derived-$VERSION}"
+APP_PATH="$DERIVED_DATA_PATH/Build/Products/Release/JP2-Creation.app"
 
 cd "$ROOT_DIR"
 
@@ -29,6 +30,7 @@ read_env_value() {
 }
 
 HUB_URL="${JP2_HUB_URL:-${VITE_CRM_URL:-}}"
+APP_SIGN_IDENTITY="${JP2_MAC_APP_SIGN_IDENTITY:-}"
 
 if [ -z "$HUB_URL" ]; then
   HUB_URL="$(read_env_value JP2_HUB_URL)"
@@ -36,6 +38,10 @@ fi
 
 if [ -z "$HUB_URL" ]; then
   HUB_URL="$(read_env_value VITE_CRM_URL)"
+fi
+
+if [ -z "$APP_SIGN_IDENTITY" ]; then
+  APP_SIGN_IDENTITY="$(read_env_value JP2_MAC_APP_SIGN_IDENTITY)"
 fi
 
 if [ -z "$HUB_URL" ]; then
@@ -53,4 +59,15 @@ xcodebuild \
   JP2_HUB_URL="$HUB_URL" \
   build
 
-echo "App macOS generee : $DERIVED_DATA_PATH/Build/Products/Release/JP2-Creation.app"
+if [ -n "$APP_SIGN_IDENTITY" ]; then
+  codesign \
+    --force \
+    --deep \
+    --options runtime \
+    --timestamp \
+    --sign "$APP_SIGN_IDENTITY" \
+    "$APP_PATH"
+  codesign --verify --deep --strict --verbose=2 "$APP_PATH"
+fi
+
+echo "App macOS generee : $APP_PATH"
