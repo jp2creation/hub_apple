@@ -1,0 +1,92 @@
+#!/bin/bash
+
+set -u
+
+if [ "${MARTIN_SOLS_SKIP_POSTINSTALL_PROMPTS:-}" = "1" ]; then
+    exit 0
+fi
+
+if [ "${3:-/}" != "/" ]; then
+    exit 0
+fi
+
+app_path="/Applications/Martin Sols.app"
+
+if [ ! -d "$app_path" ]; then
+    exit 0
+fi
+
+/usr/bin/touch "$app_path" 2>/dev/null || true
+
+console_user="$(/usr/bin/stat -f "%Su" /dev/console 2>/dev/null || true)"
+
+if [ -z "$console_user" ] || [ "$console_user" = "root" ] || [ "$console_user" = "loginwindow" ]; then
+    exit 0
+fi
+
+console_uid="$(/usr/bin/id -u "$console_user" 2>/dev/null || true)"
+home_dir="$(/usr/bin/dscl . -read "/Users/$console_user" NFSHomeDirectory 2>/dev/null | /usr/bin/awk '{ print $2 }')"
+
+if [ -z "$console_uid" ] || [ -z "$home_dir" ] || [ ! -d "$home_dir" ]; then
+    exit 0
+fi
+
+run_as_user() {
+    /bin/launchctl asuser "$console_uid" /usr/bin/sudo -u "$console_user" "$@"
+}
+
+run_as_user /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$app_path" 2>/dev/null || true
+
+dialog_button() {
+    local script="$1"
+
+    run_as_user /usr/bin/osascript -e "$script" 2>/dev/null || true
+}
+
+desktop_link="$home_dir/Desktop/Martin Sols.app"
+
+if [ ! -e "$desktop_link" ] && [ ! -L "$desktop_link" ]; then
+    desktop_answer="$(
+        dialog_button 'button returned of (display dialog "Ajouter l’icône Martin Sols sur le Bureau ?" buttons {"Non", "Oui"} default button "Oui" with title "Martin Sols")'
+    )"
+
+    if [ "$desktop_answer" = "Oui" ]; then
+        run_as_user /bin/mkdir -p "$home_dir/Desktop"
+        run_as_user /bin/ln -s "$app_path" "$desktop_link" 2>/dev/null || true
+    fi
+fi
+
+dock_entries="$(run_as_user /usr/bin/defaults read com.apple.dock persistent-apps 2>/dev/null || true)"
+
+case "$dock_entries" in
+    *"Martin Sols.app"*|*"Martin%20Sols.app"*)
+        dock_has_app="1"
+        run_as_user /usr/bin/killall Dock 2>/dev/null || true
+        ;;
+    *)
+        dock_has_app="0"
+        ;;
+esac
+
+if [ "$dock_has_app" = "0" ]; then
+    dock_answer="$(
+        dialog_button 'button returned of (display dialog "Ajouter Martin Sols dans le Dock ?" buttons {"Non", "Oui"} default button "Oui" with title "Martin Sols")'
+    )"
+
+    if [ "$dock_answer" = "Oui" ]; then
+        dock_tile='<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>file:///Applications/Martin%20Sols.app/</string><key>_CFURLStringType</key><integer>15</integer></dict></dict></dict>'
+
+        run_as_user /usr/bin/defaults write com.apple.dock persistent-apps -array-add "$dock_tile" 2>/dev/null || true
+        run_as_user /usr/bin/killall Dock 2>/dev/null || true
+    fi
+fi
+
+launch_answer="$(
+    dialog_button 'button returned of (display dialog "Installation terminée. Que souhaitez-vous faire ?" buttons {"Fermer", "Ouvrir l’app"} default button "Ouvrir l’app" with title "Martin Sols")'
+)"
+
+if [ "$launch_answer" = "Ouvrir l’app" ]; then
+    run_as_user /usr/bin/open "$app_path" 2>/dev/null || true
+fi
+
+exit 0
