@@ -10,7 +10,7 @@ if [ "${3:-/}" != "/" ]; then
     exit 0
 fi
 
-app_path="/Applications/JP2 Création.app"
+app_path="/Applications/JP2-Creation.app"
 
 if [ ! -d "$app_path" ]; then
     exit 0
@@ -59,7 +59,7 @@ fi
 dock_entries="$(run_as_user /usr/bin/defaults read com.apple.dock persistent-apps 2>/dev/null || true)"
 
 case "$dock_entries" in
-    *"JP2 Création.app"*|*"JP2%20Cr%C3%A9ation.app"*)
+    *"JP2-Creation.app"*)
         dock_has_app="1"
         run_as_user /usr/bin/killall Dock 2>/dev/null || true
         ;;
@@ -74,7 +74,7 @@ if [ "$dock_has_app" = "0" ]; then
     )"
 
     if [ "$dock_answer" = "Oui" ]; then
-        dock_tile='<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>file:///Applications/JP2%20Cr%C3%A9ation.app/</string><key>_CFURLStringType</key><integer>15</integer></dict></dict></dict>'
+        dock_tile='<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>file:///Applications/JP2-Creation.app/</string><key>_CFURLStringType</key><integer>15</integer></dict></dict></dict>'
 
         run_as_user /usr/bin/defaults write com.apple.dock persistent-apps -array-add "$dock_tile" 2>/dev/null || true
         run_as_user /usr/bin/killall Dock 2>/dev/null || true

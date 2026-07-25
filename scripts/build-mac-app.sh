@@ -53,4 +53,4 @@ xcodebuild \
   JP2_HUB_URL="$HUB_URL" \
   build
 
-echo "App macOS generee : $DERIVED_DATA_PATH/Build/Products/Release/JP2 Création.app"
+echo "App macOS generee : $DERIVED_DATA_PATH/Build/Products/Release/JP2-Creation.app"
