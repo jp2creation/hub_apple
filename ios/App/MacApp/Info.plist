@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>fr</string>
 	<key>CFBundleDisplayName</key>
-	<string>JP2 Création</string>
+	<string>Martin Sols</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconName</key>
@@ -29,9 +29,9 @@
 	<key>NSHighResolutionCapable</key>
 	<true/>
 	<key>NSLocationUsageDescription</key>
-	<string>JP2 Création utilise ta position pour les fonctions terrain de l'application.</string>
+	<string>Martin Sols utilise ta position pour les fonctions terrain de l'application.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>JP2 Création utilise ta position quand l'application est ouverte.</string>
+	<string>Martin Sols utilise ta position quand l'application est ouverte.</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSAppTransportSecurity</key>

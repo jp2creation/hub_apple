@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 VERSION="${JP2_APP_VERSION:-1.38}"
 DERIVED_DATA_PATH="${JP2_MAC_DERIVED_DATA:-$ROOT_DIR/build/mac-derived-$VERSION}"
-APP_PATH="$DERIVED_DATA_PATH/Build/Products/Release/JP2-Creation.app"
+APP_PATH="$DERIVED_DATA_PATH/Build/Products/Release/Martin Sols.app"
 
 cd "$ROOT_DIR"
 
@@ -51,7 +51,7 @@ fi
 
 xcodebuild \
   -project ios/App/App.xcodeproj \
-  -scheme "JP2 Création Mac" \
+  -scheme "Martin Sols Mac" \
   -configuration Release \
   -destination "generic/platform=macOS" \
   -derivedDataPath "$DERIVED_DATA_PATH" \

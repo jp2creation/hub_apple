@@ -4,11 +4,11 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 VERSION="${JP2_APP_VERSION:-1.38}"
 DERIVED_DATA_PATH="${JP2_MAC_DERIVED_DATA:-$ROOT_DIR/build/mac-derived-$VERSION}"
-APP_PATH="$DERIVED_DATA_PATH/Build/Products/Release/JP2-Creation.app"
+APP_PATH="$DERIVED_DATA_PATH/Build/Products/Release/Martin Sols.app"
 STAGING_DIR="$ROOT_DIR/build/mac-pkg-staging-$VERSION"
 SCRIPTS_STAGING_DIR="$ROOT_DIR/build/mac-pkg-scripts-$VERSION"
-PKG_PATH="$ROOT_DIR/build/JP2-Creation-Mac-Installer-$VERSION.pkg"
-UNSIGNED_PKG_PATH="$ROOT_DIR/build/JP2-Creation-Mac-Installer-$VERSION-unsigned.pkg"
+PKG_PATH="$ROOT_DIR/build/Martin-Sols-Mac-Installer-$VERSION.pkg"
+UNSIGNED_PKG_PATH="$ROOT_DIR/build/Martin-Sols-Mac-Installer-$VERSION-unsigned.pkg"
 EXPANDED_DIR="$ROOT_DIR/build/pkg-expanded-$VERSION"
 
 cd "$ROOT_DIR"
@@ -54,7 +54,7 @@ if [ -d "$SCRIPTS_STAGING_DIR" ]; then
   find "$SCRIPTS_STAGING_DIR" -depth -delete
 fi
 mkdir -p "$STAGING_DIR"
-COPYFILE_DISABLE=1 ditto --noextattr --norsrc "$APP_PATH" "$STAGING_DIR/JP2-Creation.app"
+COPYFILE_DISABLE=1 ditto --noextattr --norsrc "$APP_PATH" "$STAGING_DIR/Martin Sols.app"
 mkdir -p "$SCRIPTS_STAGING_DIR"
 COPYFILE_DISABLE=1 ditto --noextattr --norsrc ios/App/MacApp/Scripts "$SCRIPTS_STAGING_DIR"
 xattr -cr "$STAGING_DIR" "$SCRIPTS_STAGING_DIR" 2>/dev/null || true
@@ -67,7 +67,7 @@ if [ -f "$UNSIGNED_PKG_PATH" ]; then
   find "$UNSIGNED_PKG_PATH" -maxdepth 0 -delete
 fi
 COPYFILE_DISABLE=1 pkgbuild \
-  --identifier fr.jp2creation.hubapple.mac.pkg \
+  --identifier fr.martinsols.crm.mac.pkg \
   --version "$VERSION" \
   --install-location /Applications \
   --scripts "$SCRIPTS_STAGING_DIR" \

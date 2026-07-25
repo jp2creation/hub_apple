@@ -6,13 +6,13 @@ import Security
 import UIKit
 import WebKit
 
-@objc(JP2CreationBridgeViewController)
-class JP2CreationBridgeViewController: CAPBridgeViewController, WKScriptMessageHandlerWithReply, CLLocationManagerDelegate {
-    private static let updateManifestUrl = URL(string: "https://raw.githubusercontent.com/jp2creation/hub_apple/main/releases/jp2-creation-update.json")!
-    private static let nativeMessageHandlerName = "jp2CreationNativeApp"
+@objc(MartinSolsBridgeViewController)
+class MartinSolsBridgeViewController: CAPBridgeViewController, WKScriptMessageHandlerWithReply, CLLocationManagerDelegate {
+    private static let updateManifestUrl = URL(string: "https://raw.githubusercontent.com/jp2creation/hub_apple/main/releases/martin-sols-update.json")!
+    private static let nativeMessageHandlerName = "martinSolsNativeApp"
     private static let updateCheckDelay: TimeInterval = 7
     private static let nativeLocationTimeout: TimeInterval = 15
-    private static let keychainService = "fr.jp2creation.hubapple.mobile-auth"
+    private static let keychainService = "fr.martinsols.crm.mobile-auth"
     private static let sessionAccount = "mobile-session"
     private static let appCodeHashKey = "jp2_creation_app_code_hash"
     private static let appCodeSaltKey = "jp2_creation_app_code_salt"
@@ -226,7 +226,7 @@ class JP2CreationBridgeViewController: CAPBridgeViewController, WKScriptMessageH
     private func showNoUpdateDialog() {
         let alert = UIAlertController(
             title: "Application a jour",
-            message: "Aucune nouvelle version iPhone/iPad de JP2 Création n'est disponible pour le moment.",
+            message: "Aucune nouvelle version iPhone/iPad de Martin Sols n'est disponible pour le moment.",
             preferredStyle: .alert
         )
         alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -246,7 +246,7 @@ class JP2CreationBridgeViewController: CAPBridgeViewController, WKScriptMessageH
     private func showUpdateDialog(_ update: IosAppUpdate) {
         let versionLabel = update.version.isEmpty ? String(update.buildNumber) : update.version
         let notes = [
-            "Une nouvelle version iPhone/iPad de JP2 Création est disponible : \(versionLabel).",
+            "Une nouvelle version iPhone/iPad de Martin Sols est disponible : \(versionLabel).",
             update.releaseNotes,
             update.distribution.isEmpty ? "" : "Distribution : \(update.distribution).",
             update.installUrl == nil ? "L'installation iOS doit passer par App Store, TestFlight, MDM ou distribution entreprise." : "",
@@ -421,7 +421,7 @@ class JP2CreationBridgeViewController: CAPBridgeViewController, WKScriptMessageH
 
         context.evaluatePolicy(
             .deviceOwnerAuthentication,
-            localizedReason: "Confirme ton identite pour ouvrir JP2 Création."
+            localizedReason: "Confirme ton identite pour ouvrir Martin Sols."
         ) { [weak self] success, error in
             DispatchQueue.main.async {
                 guard let self else {
@@ -509,7 +509,7 @@ class JP2CreationBridgeViewController: CAPBridgeViewController, WKScriptMessageH
 
                 if self.storeAppCode(code) {
                     self.dispatchNativeAuthStatusChanged()
-                    reply(Self.nativeActionResult(true, "Code app JP2 Création enregistre."))
+                    reply(Self.nativeActionResult(true, "Code app Martin Sols enregistre."))
 
                     return
                 }
@@ -528,7 +528,7 @@ class JP2CreationBridgeViewController: CAPBridgeViewController, WKScriptMessageH
 
     private func showAppCodePrompt(requestId: String) {
         let alert = UIAlertController(
-            title: "Connexion JP2 Création",
+            title: "Connexion Martin Sols",
             message: "Entre le code de l'app pour ouvrir le HUB.",
             preferredStyle: .alert
         )
@@ -735,7 +735,7 @@ class JP2CreationBridgeViewController: CAPBridgeViewController, WKScriptMessageH
             detail["error"] = error.isEmpty ? "Localisation indisponible." : error
         }
 
-        let script = "window.dispatchEvent(new CustomEvent('jp2-creation:native-location-result',{detail:\(Self.javaScriptLiteral(detail))}));"
+        let script = "window.dispatchEvent(new CustomEvent('martin-sols:native-location-result',{detail:\(Self.javaScriptLiteral(detail))}));"
         evaluateCrmJavaScript(script)
     }
 
@@ -751,7 +751,7 @@ class JP2CreationBridgeViewController: CAPBridgeViewController, WKScriptMessageH
             detail["error"] = error.isEmpty ? "Authentification impossible." : error
         }
 
-        let script = "window.dispatchEvent(new CustomEvent('jp2-creation:native-auth-result',{detail:\(Self.javaScriptLiteral(detail))}));"
+        let script = "window.dispatchEvent(new CustomEvent('martin-sols:native-auth-result',{detail:\(Self.javaScriptLiteral(detail))}));"
         evaluateCrmJavaScript(script)
     }
 
@@ -762,9 +762,9 @@ class JP2CreationBridgeViewController: CAPBridgeViewController, WKScriptMessageH
         (() => {
           const legacyBrand = String.fromCharCode(77, 97, 114, 116, 105, 110, 83, 111, 108, 115);
           const legacyBrandLower = legacyBrand.charAt(0).toLowerCase() + legacyBrand.slice(1);
-          window.__jp2CreationNativeAuthStatus = \(statusLiteral);
+          window.__martinSolsNativeAuthStatus = \(statusLiteral);
           window['__' + legacyBrandLower + 'NativeAuthStatus'] = \(statusLiteral);
-          window.dispatchEvent(new CustomEvent('jp2-creation:native-auth-status-changed',{detail:\(statusLiteral)}));
+          window.dispatchEvent(new CustomEvent('martin-sols:native-auth-status-changed',{detail:\(statusLiteral)}));
         })();
         """
         evaluateCrmJavaScript(script)
@@ -853,9 +853,9 @@ class JP2CreationBridgeViewController: CAPBridgeViewController, WKScriptMessageH
           const initialAuthStatus = \(initialAuthStatus);
           const legacyBrand = String.fromCharCode(77, 97, 114, 116, 105, 110, 83, 111, 108, 115);
           const legacyBrandLower = legacyBrand.charAt(0).toLowerCase() + legacyBrand.slice(1);
-          const configKeys = ['JP2CreationCrmConfig', legacyBrand + 'CrmConfig'];
-          const nativeAppKeys = ['JP2CreationNativeApp', legacyBrand + 'NativeApp'];
-          const authStatusKeys = ['__jp2CreationNativeAuthStatus', '__' + legacyBrandLower + 'NativeAuthStatus'];
+          const configKeys = ['MartinSolsCrmConfig', legacyBrand + 'CrmConfig'];
+          const nativeAppKeys = ['MartinSolsNativeApp', legacyBrand + 'NativeApp'];
+          const authStatusKeys = ['__martinSolsNativeAuthStatus', '__' + legacyBrandLower + 'NativeAuthStatus'];
           const nativeHandler = () => window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.\(Self.nativeMessageHandlerName);
           const readFirst = (keys) => {
             for (const key of keys) {

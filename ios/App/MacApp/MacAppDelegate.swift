@@ -6,7 +6,7 @@ import Security
 import WebKit
 
 @main
-enum JP2CreationMacMain {
+enum MartinSolsMacMain {
     private static var appDelegate: MacAppDelegate?
 
     static func main() {
@@ -20,13 +20,13 @@ enum JP2CreationMacMain {
 }
 
 final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandlerWithReply, CLLocationManagerDelegate {
-    private static let updateManifestUrl = URL(string: "https://raw.githubusercontent.com/jp2creation/hub_apple/main/releases/jp2-creation-update.json")!
-    private static let nativeMessageHandlerName = "jp2CreationNativeApp"
+    private static let updateManifestUrl = URL(string: "https://raw.githubusercontent.com/jp2creation/hub_apple/main/releases/martin-sols-update.json")!
+    private static let nativeMessageHandlerName = "martinSolsNativeApp"
     private static let splashDuration: TimeInterval = 5.5
     private static let updateCheckDelay: TimeInterval = 1.5
     private static let nativeLocationTimeout: TimeInterval = 15
     private static let titleBarHeight: CGFloat = 46
-    private static let keychainService = "fr.jp2creation.hubapple.mac.mobile-auth"
+    private static let keychainService = "fr.martinsols.crm.mac.mobile-auth"
     private static let sessionAccount = "mobile-session"
     private static let appCodeHashKey = "jp2_creation_mac_app_code_hash"
     private static let appCodeSaltKey = "jp2_creation_mac_app_code_salt"
@@ -176,7 +176,7 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
         appMenu.addItem(NSMenuItem.separator())
         appMenu.addItem(
             NSMenuItem(
-                title: "Quit JP2 Création",
+                title: "Quit Martin Sols",
                 action: #selector(NSApplication.terminate(_:)),
                 keyEquivalent: "q"
             )
@@ -204,10 +204,10 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
             backing: .buffered,
             defer: false
         )
-        window.title = "JP2 Création"
+        window.title = "Martin Sols"
         window.titleVisibility = .hidden
         window.titlebarAppearsTransparent = true
-        window.backgroundColor = Self.jp2CreationRed
+        window.backgroundColor = Self.martinSolsRed
         window.isMovableByWindowBackground = true
         window.minSize = NSSize(width: 900, height: 640)
         window.isReleasedWhenClosed = false
@@ -227,9 +227,9 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
         titleBarView = NSView()
         titleBarView.translatesAutoresizingMaskIntoConstraints = false
         titleBarView.wantsLayer = true
-        titleBarView.layer?.backgroundColor = Self.jp2CreationRed.cgColor
+        titleBarView.layer?.backgroundColor = Self.martinSolsRed.cgColor
 
-        let titleLabel = NSTextField(labelWithString: "JP2 Création")
+        let titleLabel = NSTextField(labelWithString: "Martin Sols")
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = NSFont.systemFont(ofSize: 14, weight: .semibold)
         titleLabel.textColor = .white
@@ -363,11 +363,11 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
         (() => {
           const legacyBrand = String.fromCharCode(77, 97, 114, 116, 105, 110, 83, 111, 108, 115);
           document.body?.classList.add('crm-mobile-app', 'crm-mac-app');
-          const config = window.JP2CreationCrmConfig || window[legacyBrand + 'CrmConfig'];
+          const config = window.MartinSolsCrmConfig || window[legacyBrand + 'CrmConfig'];
           if (config) {
             config.mobile = { ...(config.mobile || {}), app: true };
           }
-          const mobileApp = window.JP2CreationMobileApp || window[legacyBrand + 'MobileApp'];
+          const mobileApp = window.MartinSolsMobileApp || window[legacyBrand + 'MobileApp'];
           if (mobileApp && typeof mobileApp.openSettings === 'function') {
             mobileApp.openSettings();
             return true;
@@ -386,7 +386,7 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
     private func showNativeAppSettingsDialog() {
         let alert = NSAlert()
         alert.messageText = "Paramètres de l’app"
-        alert.informativeText = "Version \(appVersionLabel)\n\nMises à jour et futurs réglages de JP2 Création."
+        alert.informativeText = "Version \(appVersionLabel)\n\nMises à jour et futurs réglages de Martin Sols."
         alert.addButton(withTitle: "Rechercher une mise à jour")
         alert.addButton(withTitle: "Fermer")
 
@@ -487,7 +487,7 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
     private func showNoUpdateDialog() {
         let alert = NSAlert()
         alert.messageText = "Application à jour"
-        alert.informativeText = "Aucune nouvelle version Mac de JP2 Création n’est disponible pour le moment."
+        alert.informativeText = "Aucune nouvelle version Mac de Martin Sols n’est disponible pour le moment."
         alert.addButton(withTitle: "OK")
         alert.runModal()
     }
@@ -506,7 +506,7 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
         let alert = NSAlert()
         alert.messageText = "Mise à jour disponible"
         alert.informativeText = [
-            "Une nouvelle version de JP2 Création est disponible : \(versionLabel).",
+            "Une nouvelle version de Martin Sols est disponible : \(versionLabel).",
             update.releaseNotes,
         ]
         .filter { !$0.isEmpty }
@@ -672,7 +672,7 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
 
         context.evaluatePolicy(
             .deviceOwnerAuthentication,
-            localizedReason: "Confirme ton identite pour ouvrir JP2 Création."
+            localizedReason: "Confirme ton identite pour ouvrir Martin Sols."
         ) { [weak self] success, error in
             DispatchQueue.main.async {
                 guard let self else {
@@ -762,7 +762,7 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
         if storeAppCode(code) {
             dispatchNativeAuthStatusChanged()
 
-            return Self.nativeActionResult(true, "Code app JP2 Création enregistre.")
+            return Self.nativeActionResult(true, "Code app Martin Sols enregistre.")
         }
 
         showNativeActionFailure(message: "Code impossible a enregistrer.")
@@ -775,7 +775,7 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
         codeField.placeholderString = "Code app"
 
         let alert = NSAlert()
-        alert.messageText = "Connexion JP2 Création"
+        alert.messageText = "Connexion Martin Sols"
         alert.informativeText = "Entre le code de l'app pour ouvrir le HUB."
         alert.accessoryView = codeField
         alert.addButton(withTitle: "Valider")
@@ -971,7 +971,7 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
             detail["error"] = error.isEmpty ? "Localisation indisponible." : error
         }
 
-        let script = "window.dispatchEvent(new CustomEvent('jp2-creation:native-location-result',{detail:\(Self.javaScriptLiteral(detail))}));"
+        let script = "window.dispatchEvent(new CustomEvent('martin-sols:native-location-result',{detail:\(Self.javaScriptLiteral(detail))}));"
         evaluateCrmJavaScript(script)
     }
 
@@ -987,7 +987,7 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
             detail["error"] = error.isEmpty ? "Authentification impossible." : error
         }
 
-        let script = "window.dispatchEvent(new CustomEvent('jp2-creation:native-auth-result',{detail:\(Self.javaScriptLiteral(detail))}));"
+        let script = "window.dispatchEvent(new CustomEvent('martin-sols:native-auth-result',{detail:\(Self.javaScriptLiteral(detail))}));"
         evaluateCrmJavaScript(script)
     }
 
@@ -998,9 +998,9 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
         (() => {
           const legacyBrand = String.fromCharCode(77, 97, 114, 116, 105, 110, 83, 111, 108, 115);
           const legacyBrandLower = legacyBrand.charAt(0).toLowerCase() + legacyBrand.slice(1);
-          window.__jp2CreationNativeAuthStatus = \(statusLiteral);
+          window.__martinSolsNativeAuthStatus = \(statusLiteral);
           window['__' + legacyBrandLower + 'NativeAuthStatus'] = \(statusLiteral);
-          window.dispatchEvent(new CustomEvent('jp2-creation:native-auth-status-changed',{detail:\(statusLiteral)}));
+          window.dispatchEvent(new CustomEvent('martin-sols:native-auth-status-changed',{detail:\(statusLiteral)}));
         })();
         """
         evaluateCrmJavaScript(script)
@@ -1028,7 +1028,7 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
         return NSColor(red: 1, green: 250.0 / 255.0, blue: 247.0 / 255.0, alpha: 1)
     }
 
-    private static var jp2CreationRed: NSColor {
+    private static var martinSolsRed: NSColor {
         return NSColor(red: 149.0 / 255.0, green: 0, blue: 46.0 / 255.0, alpha: 1)
     }
 
@@ -1122,9 +1122,9 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
           const initialAuthStatus = \(initialAuthStatus);
           const legacyBrand = String.fromCharCode(77, 97, 114, 116, 105, 110, 83, 111, 108, 115);
           const legacyBrandLower = legacyBrand.charAt(0).toLowerCase() + legacyBrand.slice(1);
-          const configKeys = ['JP2CreationCrmConfig', legacyBrand + 'CrmConfig'];
-          const nativeAppKeys = ['JP2CreationNativeApp', legacyBrand + 'NativeApp'];
-          const authStatusKeys = ['__jp2CreationNativeAuthStatus', '__' + legacyBrandLower + 'NativeAuthStatus'];
+          const configKeys = ['MartinSolsCrmConfig', legacyBrand + 'CrmConfig'];
+          const nativeAppKeys = ['MartinSolsNativeApp', legacyBrand + 'NativeApp'];
+          const authStatusKeys = ['__martinSolsNativeAuthStatus', '__' + legacyBrandLower + 'NativeAuthStatus'];
           const nativeHandler = () => window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.\(Self.nativeMessageHandlerName);
           const readFirst = (keys) => {
             for (const key of keys) {

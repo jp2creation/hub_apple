@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>fr</string>
 	<key>CFBundleDisplayName</key>
-	<string>JP2 Création</string>
+	<string>Martin Sols</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -29,9 +29,9 @@
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.business</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>JP2 Création utilise Face ID pour proteger la connexion rapide dans l'app.</string>
+	<string>Martin Sols utilise Face ID pour proteger la connexion rapide dans l'app.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>JP2 Création utilise votre position uniquement quand vous activez la localisation dans les parametres de l'app.</string>
+	<string>Martin Sols utilise votre position uniquement quand vous activez la localisation dans les parametres de l'app.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIStatusBarStyle</key>

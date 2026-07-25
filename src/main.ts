@@ -50,7 +50,7 @@ async function setupNativeRuntime(): Promise<void> {
 
 function renderStartup(): Promise<void> {
   app.innerHTML = `
-    <main class="startup-screen" data-startup-screen aria-label="Ouverture JP2 Création">
+    <main class="startup-screen" data-startup-screen aria-label="Ouverture Martin Sols">
       <img
         class="startup-intro-media"
         src="${escapeHtml(openingAnimationUrl)}"
