@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "appName": "JP2 Création",
+  "ios": {
+    "version": "1.38",
+    "buildNumber": 40,
+    "installUrl": "",
+    "distribution": "app-store-or-testflight",
+    "releaseNotes": "Parametres iPhone/iPad alignes sur Android avec code app, connexion rapide, localisation native et mises a jour."
+  },
+  "macos": {
+    "version": "1.38",
+    "buildNumber": 40,
+    "required": false,
+    "pkgUrl": "https://github.com/jp2creation/hub_apple/releases/download/jp2-creation-mac-v1.38/JP2-Creation-Mac-Installer-1.38.pkg",
+    "sha256": "cbeccc22a5d97c6c4b4f98bb324380aacd80e14e866090c65db9a60e545e5362",
+    "releaseNotes": "Parametres Mac alignes sur Android avec code app, connexion rapide, localisation native, barre JP2 Création et installation dans Applications."
+  }
+}

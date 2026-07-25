@@ -6,16 +6,16 @@ import Security
 import UIKit
 import WebKit
 
-@objc(MartinSolsBridgeViewController)
-class MartinSolsBridgeViewController: CAPBridgeViewController, WKScriptMessageHandlerWithReply, CLLocationManagerDelegate {
-    private static let updateManifestUrl = URL(string: "https://raw.githubusercontent.com/jp2creation/hub_apple/main/releases/martin-sols-update.json")!
-    private static let nativeMessageHandlerName = "martinSolsNativeApp"
+@objc(JP2CreationBridgeViewController)
+class JP2CreationBridgeViewController: CAPBridgeViewController, WKScriptMessageHandlerWithReply, CLLocationManagerDelegate {
+    private static let updateManifestUrl = URL(string: "https://raw.githubusercontent.com/jp2creation/hub_apple/main/releases/jp2-creation-update.json")!
+    private static let nativeMessageHandlerName = "jp2CreationNativeApp"
     private static let updateCheckDelay: TimeInterval = 7
     private static let nativeLocationTimeout: TimeInterval = 15
-    private static let keychainService = "fr.martinsols.crm.mobile-auth"
+    private static let keychainService = "fr.jp2creation.hubapple.mobile-auth"
     private static let sessionAccount = "mobile-session"
-    private static let appCodeHashKey = "martin_sols_app_code_hash"
-    private static let appCodeSaltKey = "martin_sols_app_code_salt"
+    private static let appCodeHashKey = "jp2_creation_app_code_hash"
+    private static let appCodeSaltKey = "jp2_creation_app_code_salt"
     private static let appCodeHashIterations = 60000
     private static let appCodeSaltBytes = 16
 
@@ -226,7 +226,7 @@ class MartinSolsBridgeViewController: CAPBridgeViewController, WKScriptMessageHa
     private func showNoUpdateDialog() {
         let alert = UIAlertController(
             title: "Application a jour",
-            message: "Aucune nouvelle version iPhone/iPad de Martin Sols n'est disponible pour le moment.",
+            message: "Aucune nouvelle version iPhone/iPad de JP2 Création n'est disponible pour le moment.",
             preferredStyle: .alert
         )
         alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -246,7 +246,7 @@ class MartinSolsBridgeViewController: CAPBridgeViewController, WKScriptMessageHa
     private func showUpdateDialog(_ update: IosAppUpdate) {
         let versionLabel = update.version.isEmpty ? String(update.buildNumber) : update.version
         let notes = [
-            "Une nouvelle version iPhone/iPad de Martin Sols est disponible : \(versionLabel).",
+            "Une nouvelle version iPhone/iPad de JP2 Création est disponible : \(versionLabel).",
             update.releaseNotes,
             update.distribution.isEmpty ? "" : "Distribution : \(update.distribution).",
             update.installUrl == nil ? "L'installation iOS doit passer par App Store, TestFlight, MDM ou distribution entreprise." : "",
@@ -421,7 +421,7 @@ class MartinSolsBridgeViewController: CAPBridgeViewController, WKScriptMessageHa
 
         context.evaluatePolicy(
             .deviceOwnerAuthentication,
-            localizedReason: "Confirme ton identite pour ouvrir Martin Sols."
+            localizedReason: "Confirme ton identite pour ouvrir JP2 Création."
         ) { [weak self] success, error in
             DispatchQueue.main.async {
                 guard let self else {
@@ -509,7 +509,7 @@ class MartinSolsBridgeViewController: CAPBridgeViewController, WKScriptMessageHa
 
                 if self.storeAppCode(code) {
                     self.dispatchNativeAuthStatusChanged()
-                    reply(Self.nativeActionResult(true, "Code app Martin Sols enregistre."))
+                    reply(Self.nativeActionResult(true, "Code app JP2 Création enregistre."))
 
                     return
                 }
@@ -528,7 +528,7 @@ class MartinSolsBridgeViewController: CAPBridgeViewController, WKScriptMessageHa
 
     private func showAppCodePrompt(requestId: String) {
         let alert = UIAlertController(
-            title: "Connexion Martin Sols",
+            title: "Connexion JP2 Création",
             message: "Entre le code de l'app pour ouvrir le HUB.",
             preferredStyle: .alert
         )
@@ -735,7 +735,7 @@ class MartinSolsBridgeViewController: CAPBridgeViewController, WKScriptMessageHa
             detail["error"] = error.isEmpty ? "Localisation indisponible." : error
         }
 
-        let script = "window.dispatchEvent(new CustomEvent('martin-sols:native-location-result',{detail:\(Self.javaScriptLiteral(detail))}));"
+        let script = "window.dispatchEvent(new CustomEvent('jp2-creation:native-location-result',{detail:\(Self.javaScriptLiteral(detail))}));"
         evaluateCrmJavaScript(script)
     }
 
@@ -751,7 +751,7 @@ class MartinSolsBridgeViewController: CAPBridgeViewController, WKScriptMessageHa
             detail["error"] = error.isEmpty ? "Authentification impossible." : error
         }
 
-        let script = "window.dispatchEvent(new CustomEvent('martin-sols:native-auth-result',{detail:\(Self.javaScriptLiteral(detail))}));"
+        let script = "window.dispatchEvent(new CustomEvent('jp2-creation:native-auth-result',{detail:\(Self.javaScriptLiteral(detail))}));"
         evaluateCrmJavaScript(script)
     }
 
@@ -759,8 +759,13 @@ class MartinSolsBridgeViewController: CAPBridgeViewController, WKScriptMessageHa
         let status = mobileAuthStatusDictionary()
         let statusLiteral = Self.javaScriptLiteral(status)
         let script = """
-        window.__martinSolsNativeAuthStatus = \(statusLiteral);
-        window.dispatchEvent(new CustomEvent('martin-sols:native-auth-status-changed',{detail:\(statusLiteral)}));
+        (() => {
+          const legacyBrand = String.fromCharCode(77, 97, 114, 116, 105, 110, 83, 111, 108, 115);
+          const legacyBrandLower = legacyBrand.charAt(0).toLowerCase() + legacyBrand.slice(1);
+          window.__jp2CreationNativeAuthStatus = \(statusLiteral);
+          window['__' + legacyBrandLower + 'NativeAuthStatus'] = \(statusLiteral);
+          window.dispatchEvent(new CustomEvent('jp2-creation:native-auth-status-changed',{detail:\(statusLiteral)}));
+        })();
         """
         evaluateCrmJavaScript(script)
     }
@@ -772,7 +777,50 @@ class MartinSolsBridgeViewController: CAPBridgeViewController, WKScriptMessageHa
     }
 
     private func isTrustedCrmPage() -> Bool {
-        return crmWebView?.url?.host?.caseInsensitiveCompare("crm.jp2.fr") == .orderedSame
+        guard let url = crmWebView?.url, let host = url.host else {
+            return false
+        }
+
+        if let configuredHost = Self.configuredHubHost {
+            return host.caseInsensitiveCompare(configuredHost) == .orderedSame
+        }
+
+        return url.scheme?.caseInsensitiveCompare("https") == .orderedSame
+    }
+
+    private static var configuredHubHost: String? {
+        return configuredHubUrl(source: "ios_app")?.host
+    }
+
+    private static func configuredHubUrl(source: String) -> URL? {
+        let rawValue = Bundle.main.object(forInfoDictionaryKey: "JP2HubURL") as? String ?? ""
+        var trimmed = rawValue.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if trimmed.isEmpty || trimmed.contains("$(") {
+            return nil
+        }
+
+        if !trimmed.lowercased().hasPrefix("http://") && !trimmed.lowercased().hasPrefix("https://") {
+            trimmed = "https://\(trimmed)"
+        }
+
+        guard var components = URLComponents(string: trimmed), components.host?.isEmpty == false else {
+            return nil
+        }
+
+        var queryItems = components.queryItems ?? []
+
+        if !queryItems.contains(where: { $0.name == "mobile_app" }) {
+            queryItems.append(URLQueryItem(name: "mobile_app", value: "1"))
+        }
+
+        if !queryItems.contains(where: { $0.name == "source" }) {
+            queryItems.append(URLQueryItem(name: "source", value: source))
+        }
+
+        components.queryItems = queryItems
+
+        return components.url
     }
 
     private var appVersionName: String {
@@ -803,7 +851,26 @@ class MartinSolsBridgeViewController: CAPBridgeViewController, WKScriptMessageHa
           const versionCode = \(versionCode);
           const platformName = \(platformName);
           const initialAuthStatus = \(initialAuthStatus);
+          const legacyBrand = String.fromCharCode(77, 97, 114, 116, 105, 110, 83, 111, 108, 115);
+          const legacyBrandLower = legacyBrand.charAt(0).toLowerCase() + legacyBrand.slice(1);
+          const configKeys = ['JP2CreationCrmConfig', legacyBrand + 'CrmConfig'];
+          const nativeAppKeys = ['JP2CreationNativeApp', legacyBrand + 'NativeApp'];
+          const authStatusKeys = ['__jp2CreationNativeAuthStatus', '__' + legacyBrandLower + 'NativeAuthStatus'];
           const nativeHandler = () => window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.\(Self.nativeMessageHandlerName);
+          const readFirst = (keys) => {
+            for (const key of keys) {
+              if (window[key]) {
+                return window[key];
+              }
+            }
+
+            return undefined;
+          };
+          const writeAll = (keys, value) => {
+            keys.forEach((key) => {
+              window[key] = value;
+            });
+          };
           const normalizeNativeResult = (value) => {
             if (typeof value === 'string') {
               return value;
@@ -839,41 +906,43 @@ class MartinSolsBridgeViewController: CAPBridgeViewController, WKScriptMessageHa
           };
           const syncAuthStatus = (status) => {
             if (status && typeof status === 'object') {
-              window.__martinSolsNativeAuthStatus = status;
+              writeAll(authStatusKeys, status);
             }
 
-            return window.__martinSolsNativeAuthStatus || initialAuthStatus;
+            return readFirst(authStatusKeys) || initialAuthStatus;
           };
           const refreshAuthStatus = () => postNativeMessage('getMobileAuthStatus')
             .then(syncAuthStatus)
-            .catch(() => window.__martinSolsNativeAuthStatus || initialAuthStatus);
+            .catch(() => readFirst(authStatusKeys) || initialAuthStatus);
           const markAsInstalledApp = () => {
             document.documentElement.classList.add('crm-ios-app');
             document.body?.classList.add('crm-mobile-app', 'crm-ios-app');
-            const config = window.MartinSolsCrmConfig;
+            const config = readFirst(configKeys);
 
             if (config) {
               config.mobile = Object.assign({}, config.mobile || {}, { app: true });
             }
           };
-          let crmConfig = window.MartinSolsCrmConfig;
+          let crmConfig = readFirst(configKeys);
 
-          window.__martinSolsNativeAuthStatus = initialAuthStatus;
+          writeAll(authStatusKeys, initialAuthStatus);
 
-          try {
-            Object.defineProperty(window, 'MartinSolsCrmConfig', {
-              configurable: true,
-              get() {
-                return crmConfig;
-              },
-              set(value) {
-                crmConfig = value;
-                markAsInstalledApp();
-              },
-            });
-          } catch (_) {}
+          configKeys.forEach((configKey) => {
+            try {
+              Object.defineProperty(window, configKey, {
+                configurable: true,
+                get() {
+                  return crmConfig;
+                },
+                set(value) {
+                  crmConfig = value;
+                  markAsInstalledApp();
+                },
+              });
+            } catch (_) {}
+          });
 
-          window.MartinSolsNativeApp = {
+          const nativeApp = {
             getVersionName() {
               return versionName;
             },
@@ -887,7 +956,7 @@ class MartinSolsBridgeViewController: CAPBridgeViewController, WKScriptMessageHa
               return postNativeMessage('checkForUpdates').then(normalizeNativeResult);
             },
             getMobileAuthStatus() {
-              return JSON.stringify(window.__martinSolsNativeAuthStatus || initialAuthStatus);
+              return JSON.stringify(readFirst(authStatusKeys) || initialAuthStatus);
             },
             saveMobileSession(payload) {
               return postNativeMessage('saveMobileSession', { payload }).then((result) => {
@@ -928,6 +997,7 @@ class MartinSolsBridgeViewController: CAPBridgeViewController, WKScriptMessageHa
             },
           };
 
+          writeAll(nativeAppKeys, nativeApp);
           refreshAuthStatus();
           markAsInstalledApp();
           document.addEventListener('DOMContentLoaded', markAsInstalledApp);

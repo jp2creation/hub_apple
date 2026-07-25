@@ -1,6 +1,6 @@
-# JP2 Hub Source Available License 1.0
+# JP2 Création Source Available License 1.0
 
-Copyright (c) 2026 Jean-Philippe DEGERT / JP2 Creation.
+Copyright (c) 2026 JP2 Création.
 All rights reserved except as expressly granted below.
 
 This license is a source-available license. It is not an OSI-approved open source
@@ -9,7 +9,7 @@ restricted and require prior written permission from the copyright holder.
 
 ## 1. Definitions
 
-"Software" means the JP2 Hub source code, documentation, assets,
+"Software" means the JP2 Création source code, documentation, assets,
 configuration, mobile code, modules and all related files contained in this
 repository.
 
@@ -46,8 +46,7 @@ use, resale, hosting, sublicensing or Redistribution.
 
 ## 3. Uses Requiring Prior Written Permission
 
-You must obtain prior written permission from Jean-Philippe DEGERT / JP2
-Creation before any of the following:
+You must obtain prior written permission from JP2 Création before any of the following:
 
 - using the Software in a professional, company, client, association, public
   body or production context;
@@ -58,16 +57,16 @@ Creation before any of the following:
 - distributing the Software, a fork, a modified version, a mobile build, an
   installer, a compiled asset bundle or any derivative work;
 - removing or replacing the copyright, license, attribution or ownership notices;
-- using the Martin Sols, JP2 Creation or HUB names, logos or visual identity
+- using the JP2 Création or HUB names, logos or visual identity
   outside the permissions granted by the copyright holder.
 
-Only Jean-Philippe DEGERT / JP2 Creation may grant distribution or professional
+Only JP2 Création may grant distribution or professional
 use rights. Permission must be explicit and written.
 
 ## 4. Contributions
 
 By submitting a contribution, you confirm that you have the right to submit it
-and you grant Jean-Philippe DEGERT / JP2 Creation a perpetual, worldwide,
+and you grant JP2 Création a perpetual, worldwide,
 royalty-free license to use, reproduce, modify, distribute, sublicense and
 relicense your contribution as part of the Software.
 
@@ -100,5 +99,5 @@ your possession or control, unless a separate written agreement allows otherwise
 ## 9. Contact
 
 For Professional Use, Commercial Use, resale, redistribution, hosting,
-white-labeling or any doubt about permitted use, contact Jean-Philippe DEGERT /
-JP2 Creation before using the Software.
+white-labeling or any doubt about permitted use, contact JP2 Création before
+using the Software.

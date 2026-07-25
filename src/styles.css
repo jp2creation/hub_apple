@@ -1,9 +1,9 @@
 :root {
   color-scheme: light;
-  --martin-sols-red: #95002e;
-  --martin-sols-background: #f5f7fb;
-  --martin-sols-navigation: #111827;
-  --martin-sols-splash: #fffaf7;
+  --jp2-creation-red: #95002e;
+  --jp2-creation-background: #f5f7fb;
+  --jp2-creation-navigation: #111827;
+  --jp2-creation-splash: #fffaf7;
   background: #f5f7fb;
   font-family: "DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-synthesis: none;
@@ -24,7 +24,7 @@ body,
 
 body {
   min-width: 320px;
-  background: var(--martin-sols-background);
+  background: var(--jp2-creation-background);
   overscroll-behavior: none;
 }
 
@@ -46,7 +46,7 @@ html.crm-native-handoff #app {
   place-items: center;
   padding: max(24px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
   overflow: hidden;
-  background: var(--martin-sols-splash);
+  background: var(--jp2-creation-splash);
   isolation: isolate;
 }
 
@@ -61,6 +61,25 @@ html.crm-native-handoff #app {
   transition:
     opacity 360ms ease,
     transform 560ms ease;
+}
+
+.startup-message {
+  width: min(90vw, 420px);
+  display: grid;
+  gap: 10px;
+  padding: 24px;
+  color: #111827;
+  text-align: center;
+}
+
+.startup-message strong {
+  color: var(--jp2-creation-red);
+  font-size: 1.15rem;
+}
+
+.startup-message span {
+  color: #4b5563;
+  line-height: 1.45;
 }
 
 .startup-screen.is-finishing .startup-intro-media {

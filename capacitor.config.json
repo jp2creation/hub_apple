@@ -1,12 +1,10 @@
 {
-  "appId": "fr.martinsols.crm",
-  "appName": "Martin Sols",
+  "appId": "fr.jp2creation.hubapple",
+  "appName": "JP2 Création",
   "webDir": "dist",
   "server": {
     "allowNavigation": [
-      "crm.jp2.fr",
-      "*.jp2.fr",
-      "martinsols.addvancesolutions.fr"
+      "*"
     ]
   },
   "ios": {

@@ -7,8 +7,9 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 
 const openingAnimationUrl = new URL('./assets/opening-animation.gif', import.meta.url).href;
 const openingAnimationDurationMs = 5500;
-const defaultCrmUrl = 'https://crm.jp2.fr/?mobile_app=1&source=ios_app';
-const crmUrl = normalizeCrmUrl(import.meta.env.VITE_CRM_URL || import.meta.env.VITE_API_BASE_URL || defaultCrmUrl);
+const crmUrl = normalizeCrmUrl(
+  import.meta.env.VITE_CRM_URL || import.meta.env.VITE_HUB_URL || import.meta.env.VITE_API_BASE_URL || '',
+);
 const appRoot = document.querySelector<HTMLDivElement>('#app');
 
 if (!appRoot) {
@@ -49,7 +50,7 @@ async function setupNativeRuntime(): Promise<void> {
 
 function renderStartup(): Promise<void> {
   app.innerHTML = `
-    <main class="startup-screen" data-startup-screen aria-label="Ouverture Martin Sols">
+    <main class="startup-screen" data-startup-screen aria-label="Ouverture JP2 Création">
       <img
         class="startup-intro-media"
         src="${escapeHtml(openingAnimationUrl)}"
@@ -93,6 +94,11 @@ function renderStartup(): Promise<void> {
 }
 
 function openCrmWebView(): void {
+  if (!crmUrl) {
+    renderMissingHubUrl();
+    return;
+  }
+
   document.documentElement.classList.add('crm-native-handoff');
   app.innerHTML = '';
   window.location.replace(crmUrl);
@@ -102,7 +108,7 @@ function normalizeCrmUrl(value: string): string {
   let trimmed = value.trim();
 
   if (!trimmed) {
-    return defaultCrmUrl;
+    return '';
   }
 
   if (!/^https?:\/\//i.test(trimmed)) {
@@ -112,14 +118,29 @@ function normalizeCrmUrl(value: string): string {
   try {
     const url = new URL(trimmed);
 
-    if (url.hostname === 'crm.jp2.fr' && !url.searchParams.has('mobile_app') && !url.searchParams.has('source')) {
+    if (!url.searchParams.has('mobile_app')) {
       url.searchParams.set('mobile_app', '1');
+    }
+
+    if (!url.searchParams.has('source')) {
+      url.searchParams.set('source', 'ios_app');
     }
 
     return url.href;
   } catch {
-    return defaultCrmUrl;
+    return '';
   }
+}
+
+function renderMissingHubUrl(): void {
+  app.innerHTML = `
+    <main class="startup-screen" data-startup-screen aria-label="Configuration HUB manquante">
+      <section class="startup-message">
+        <strong>URL HUB non configuree</strong>
+        <span>Renseigne VITE_CRM_URL dans le fichier .env local, puis reconstruis l'app.</span>
+      </section>
+    </main>
+  `;
 }
 
 function isNativeApp(): boolean {

@@ -11,7 +11,7 @@
 		4D22ABE92AF431CB00220026 /* CapApp-SPM in Frameworks */ = {isa = PBXBuildFile; productRef = 4D22ABE82AF431CB00220026 /* CapApp-SPM */; };
 		50379B232058CBB4000EE86E /* capacitor.config.json in Resources */ = {isa = PBXBuildFile; fileRef = 50379B222058CBB4000EE86E /* capacitor.config.json */; };
 		504EC3081FED79650016851F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
-		504EC3191FED79650016851F /* MartinSolsBridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC31A1FED79650016851F /* MartinSolsBridgeViewController.swift */; };
+		504EC3191FED79650016851F /* JP2CreationBridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC31A1FED79650016851F /* JP2CreationBridgeViewController.swift */; };
 		504EC30D1FED79650016851F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30B1FED79650016851F /* Main.storyboard */; };
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
@@ -27,13 +27,13 @@
 		50379B222058CBB4000EE86E /* capacitor.config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = capacitor.config.json; sourceTree = "<group>"; };
 		504EC3041FED79650016851F /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504EC3071FED79650016851F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		504EC31A1FED79650016851F /* MartinSolsBridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MartinSolsBridgeViewController.swift; sourceTree = "<group>"; };
+		504EC31A1FED79650016851F /* JP2CreationBridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JP2CreationBridgeViewController.swift; sourceTree = "<group>"; };
 		504EC30C1FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		504EC30E1FED79650016851F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		504EC3111FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		504EC3131FED79650016851F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50B271D01FEDC1A000F3C39B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
-		60A100052DCA000000000001 /* Martin Sols.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Martin Sols.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		60A100052DCA000000000001 /* JP2 Création.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "JP2 Création.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60A100062DCA000000000001 /* MacAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacAppDelegate.swift; sourceTree = "<group>"; };
 		60A100072DCA000000000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60A100082DCA000000000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				504EC3041FED79650016851F /* App.app */,
-				60A100052DCA000000000001 /* Martin Sols.app */,
+				60A100052DCA000000000001 /* JP2 Création.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,7 +87,7 @@
 			children = (
 				50379B222058CBB4000EE86E /* capacitor.config.json */,
 				504EC3071FED79650016851F /* AppDelegate.swift */,
-				504EC31A1FED79650016851F /* MartinSolsBridgeViewController.swift */,
+				504EC31A1FED79650016851F /* JP2CreationBridgeViewController.swift */,
 				504EC30B1FED79650016851F /* Main.storyboard */,
 				504EC30E1FED79650016851F /* Assets.xcassets */,
 				504EC3101FED79650016851F /* LaunchScreen.storyboard */,
@@ -140,9 +140,9 @@
 			productReference = 504EC3041FED79650016851F /* App.app */;
 			productType = "com.apple.product-type.application";
 		};
-		60A100102DCA000000000001 /* Martin Sols Mac */ = {
+		60A100102DCA000000000001 /* JP2 Création Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 60A100132DCA000000000001 /* Build configuration list for PBXNativeTarget "Martin Sols Mac" */;
+			buildConfigurationList = 60A100132DCA000000000001 /* Build configuration list for PBXNativeTarget "JP2 Création Mac" */;
 			buildPhases = (
 				60A1000B2DCA000000000001 /* Sources */,
 				60A1000C2DCA000000000001 /* Frameworks */,
@@ -152,11 +152,11 @@
 			);
 			dependencies = (
 			);
-			name = "Martin Sols Mac";
+			name = "JP2 Création Mac";
 			packageProductDependencies = (
 			);
-			productName = "Martin Sols";
-			productReference = 60A100052DCA000000000001 /* Martin Sols.app */;
+			productName = "JP2 Création";
+			productReference = 60A100052DCA000000000001 /* JP2 Création.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -197,7 +197,7 @@
 			projectRoot = "";
 			targets = (
 				504EC3031FED79650016851F /* App */,
-				60A100102DCA000000000001 /* Martin Sols Mac */,
+				60A100102DCA000000000001 /* JP2 Création Mac */,
 			);
 		};
 /* End PBXProject section */
@@ -233,7 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
-				504EC3191FED79650016851F /* MartinSolsBridgeViewController.swift in Sources */,
+				504EC3191FED79650016851F /* JP2CreationBridgeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,7 +391,7 @@
 				);
 				MARKETING_VERSION = 1.38;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
-				PRODUCT_BUNDLE_IDENTIFIER = fr.martinsols.crm;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.jp2creation.hubapple;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -413,7 +413,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.38;
-				PRODUCT_BUNDLE_IDENTIFIER = fr.martinsols.crm;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.jp2creation.hubapple;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
@@ -437,8 +437,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.38;
-				PRODUCT_BUNDLE_IDENTIFIER = fr.martinsols.crm.mac;
-				PRODUCT_NAME = "Martin Sols";
+				PRODUCT_BUNDLE_IDENTIFIER = fr.jp2creation.hubapple.mac;
+				PRODUCT_NAME = "JP2 Création";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -461,8 +461,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.38;
-				PRODUCT_BUNDLE_IDENTIFIER = fr.martinsols.crm.mac;
-				PRODUCT_NAME = "Martin Sols";
+				PRODUCT_BUNDLE_IDENTIFIER = fr.jp2creation.hubapple.mac;
+				PRODUCT_NAME = "JP2 Création";
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -491,7 +491,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		60A100132DCA000000000001 /* Build configuration list for PBXNativeTarget "Martin Sols Mac" */ = {
+		60A100132DCA000000000001 /* Build configuration list for PBXNativeTarget "JP2 Création Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				60A100112DCA000000000001 /* Debug */,
