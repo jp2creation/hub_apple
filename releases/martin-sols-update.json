@@ -13,7 +13,7 @@
     "buildNumber": 40,
     "required": false,
     "pkgUrl": "https://github.com/jp2creation/hub_apple/releases/download/martin-sols-mac-v1.38/Martin-Sols-Mac-Installer-1.38.pkg",
-    "sha256": "504bafab47625d5004f40beb552ffcb429ed99a11ca4695f5d5df112f2c102b5",
+    "sha256": "2d7700d8326c50e0c94d0bc3136186abdb4bc21f7f0c804504ccf544688d781a",
     "releaseNotes": "Parametres Mac alignes sur Android avec code app, connexion rapide, localisation native, barre Martin Sols et installation dans Applications."
   }
 }

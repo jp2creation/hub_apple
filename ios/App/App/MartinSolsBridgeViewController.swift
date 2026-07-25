@@ -12,7 +12,7 @@ class MartinSolsBridgeViewController: CAPBridgeViewController, WKScriptMessageHa
     private static let nativeMessageHandlerName = "martinSolsNativeApp"
     private static let updateCheckDelay: TimeInterval = 7
     private static let nativeLocationTimeout: TimeInterval = 15
-    private static let keychainService = "fr.martinsols.crm.mobile-auth"
+    private static let keychainService = "fr.martinsols.hub.mobile-auth"
     private static let sessionAccount = "mobile-session"
     private static let appCodeHashKey = "jp2_creation_app_code_hash"
     private static let appCodeSaltKey = "jp2_creation_app_code_salt"

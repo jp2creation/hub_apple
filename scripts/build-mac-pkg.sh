@@ -67,7 +67,7 @@ if [ -f "$UNSIGNED_PKG_PATH" ]; then
   find "$UNSIGNED_PKG_PATH" -maxdepth 0 -delete
 fi
 COPYFILE_DISABLE=1 pkgbuild \
-  --identifier fr.martinsols.crm.mac.pkg \
+  --identifier fr.martinsols.hub.mac.pkg \
   --version "$VERSION" \
   --install-location /Applications \
   --scripts "$SCRIPTS_STAGING_DIR" \

@@ -26,7 +26,7 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
     private static let updateCheckDelay: TimeInterval = 1.5
     private static let nativeLocationTimeout: TimeInterval = 15
     private static let titleBarHeight: CGFloat = 46
-    private static let keychainService = "fr.martinsols.crm.mac.mobile-auth"
+    private static let keychainService = "fr.martinsols.hub.mac.mobile-auth"
     private static let sessionAccount = "mobile-session"
     private static let appCodeHashKey = "jp2_creation_mac_app_code_hash"
     private static let appCodeSaltKey = "jp2_creation_mac_app_code_salt"
@@ -1085,7 +1085,7 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
           <body>
             <main>
               <strong>URL HUB non configuree</strong>
-              <span>Renseigne JP2_HUB_URL ou VITE_CRM_URL dans le fichier .env local, puis reconstruis le paquet macOS.</span>
+              <span>Renseigne JP2_HUB_URL ou VITE_HUB_URL dans le fichier .env local, puis reconstruis le paquet macOS.</span>
             </main>
           </body>
         </html>

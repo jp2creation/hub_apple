@@ -29,7 +29,7 @@ read_env_value() {
   done < "$ROOT_DIR/.env"
 }
 
-HUB_URL="${JP2_HUB_URL:-${VITE_CRM_URL:-}}"
+HUB_URL="${JP2_HUB_URL:-${VITE_HUB_URL:-}}"
 APP_SIGN_IDENTITY="${JP2_MAC_APP_SIGN_IDENTITY:-}"
 
 if [ -z "$HUB_URL" ]; then
@@ -37,7 +37,7 @@ if [ -z "$HUB_URL" ]; then
 fi
 
 if [ -z "$HUB_URL" ]; then
-  HUB_URL="$(read_env_value VITE_CRM_URL)"
+  HUB_URL="$(read_env_value VITE_HUB_URL)"
 fi
 
 if [ -z "$APP_SIGN_IDENTITY" ]; then
@@ -45,7 +45,7 @@ if [ -z "$APP_SIGN_IDENTITY" ]; then
 fi
 
 if [ -z "$HUB_URL" ]; then
-  echo "Configure JP2_HUB_URL ou VITE_CRM_URL dans .env avant de construire l'app macOS." >&2
+  echo "Configure JP2_HUB_URL ou VITE_HUB_URL dans .env avant de construire l'app macOS." >&2
   exit 1
 fi
 

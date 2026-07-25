@@ -7,8 +7,8 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 
 const openingAnimationUrl = new URL('./assets/opening-animation.gif', import.meta.url).href;
 const openingAnimationDurationMs = 5500;
-const crmUrl = normalizeCrmUrl(
-  import.meta.env.VITE_CRM_URL || import.meta.env.VITE_HUB_URL || import.meta.env.VITE_API_BASE_URL || '',
+const hubUrl = normalizeHubUrl(
+  import.meta.env.VITE_HUB_URL || import.meta.env.VITE_API_BASE_URL || '',
 );
 const appRoot = document.querySelector<HTMLDivElement>('#app');
 
@@ -25,7 +25,7 @@ async function boot(): Promise<void> {
 
   await setupNativeRuntime();
   await startupIntro;
-  openCrmWebView();
+  openHubWebView();
 }
 
 async function setupNativeRuntime(): Promise<void> {
@@ -93,18 +93,18 @@ function renderStartup(): Promise<void> {
   });
 }
 
-function openCrmWebView(): void {
-  if (!crmUrl) {
+function openHubWebView(): void {
+  if (!hubUrl) {
     renderMissingHubUrl();
     return;
   }
 
-  document.documentElement.classList.add('crm-native-handoff');
+  document.documentElement.classList.add('hub-native-handoff');
   app.innerHTML = '';
-  window.location.replace(crmUrl);
+  window.location.replace(hubUrl);
 }
 
-function normalizeCrmUrl(value: string): string {
+function normalizeHubUrl(value: string): string {
   let trimmed = value.trim();
 
   if (!trimmed) {
@@ -137,7 +137,7 @@ function renderMissingHubUrl(): void {
     <main class="startup-screen" data-startup-screen aria-label="Configuration HUB manquante">
       <section class="startup-message">
         <strong>URL HUB non configuree</strong>
-        <span>Renseigne VITE_CRM_URL dans le fichier .env local, puis reconstruis l'app.</span>
+        <span>Renseigne VITE_HUB_URL dans le fichier .env local, puis reconstruis l'app.</span>
       </section>
     </main>
   `;

@@ -28,13 +28,13 @@ body {
   overscroll-behavior: none;
 }
 
-html.crm-native-handoff,
-html.crm-native-handoff body,
-html.crm-native-handoff #app {
+html.hub-native-handoff,
+html.hub-native-handoff body,
+html.hub-native-handoff #app {
   background: #f5f7fb;
 }
 
-html.crm-native-handoff #app {
+html.hub-native-handoff #app {
   display: none;
 }
 

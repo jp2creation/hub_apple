@@ -4,7 +4,7 @@ Applications Apple Martin Sols branchees au HUB.
 
 Ce depot contient le developpement iPhone, iPad et macOS de l'app Martin Sols. Le code metier reste dans le HUB Laravel et l'app charge l'adresse configuree localement via WebView.
 
-L'URL du HUB ne doit pas etre publiee dans le depot. Pour brancher l'app sur une installation, copier `.env.example` vers `.env`, puis renseigner `VITE_CRM_URL` avec l'adresse de l'installation HUB. Le build macOS lit aussi `JP2_HUB_URL`; s'il n'est pas defini, il reutilise `VITE_CRM_URL`.
+L'URL du HUB ne doit pas etre publiee dans le depot. Pour brancher l'app sur une installation, copier `.env.example` vers `.env`, puis renseigner `VITE_HUB_URL` avec l'adresse de l'installation HUB. Le build macOS lit aussi `JP2_HUB_URL`; s'il n'est pas defini, il reutilise `VITE_HUB_URL`.
 
 ## Contenu
 

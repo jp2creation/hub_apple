@@ -391,7 +391,7 @@
 				);
 				MARKETING_VERSION = 1.38;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
-				PRODUCT_BUNDLE_IDENTIFIER = fr.martinsols.crm;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.martinsols.hub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -413,7 +413,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.38;
-				PRODUCT_BUNDLE_IDENTIFIER = fr.martinsols.crm;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.martinsols.hub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
@@ -437,7 +437,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.38;
-				PRODUCT_BUNDLE_IDENTIFIER = fr.martinsols.crm.mac;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.martinsols.hub.mac;
 				PRODUCT_NAME = "Martin Sols";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -461,7 +461,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.38;
-				PRODUCT_BUNDLE_IDENTIFIER = fr.martinsols.crm.mac;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.martinsols.hub.mac;
 				PRODUCT_NAME = "Martin Sols";
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
