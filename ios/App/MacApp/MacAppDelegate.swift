@@ -25,7 +25,7 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
     private static let splashDuration: TimeInterval = 5.5
     private static let updateCheckDelay: TimeInterval = 1.5
     private static let nativeLocationTimeout: TimeInterval = 15
-    private static let titleBarHeight: CGFloat = 46
+    private static let titleBarHeight: CGFloat = 38
     private static let keychainService = "fr.martinsols.hub.mac.mobile-auth"
     private static let sessionAccount = "mobile-session"
     private static let appCodeHashKey = "jp2_creation_mac_app_code_hash"
@@ -266,12 +266,12 @@ final class MacAppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegat
 
             titleLabel.leadingAnchor.constraint(equalTo: titleBarView.leadingAnchor, constant: 104),
             titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: settingsButton.leadingAnchor, constant: -12),
-            titleLabel.centerYAnchor.constraint(equalTo: titleBarView.centerYAnchor, constant: 2),
+            titleLabel.centerYAnchor.constraint(equalTo: titleBarView.centerYAnchor, constant: 1),
 
             settingsButton.trailingAnchor.constraint(equalTo: titleBarView.trailingAnchor, constant: -16),
-            settingsButton.centerYAnchor.constraint(equalTo: titleBarView.centerYAnchor, constant: 2),
-            settingsButton.widthAnchor.constraint(equalToConstant: 32),
-            settingsButton.heightAnchor.constraint(equalToConstant: 32),
+            settingsButton.centerYAnchor.constraint(equalTo: titleBarView.centerYAnchor, constant: 1),
+            settingsButton.widthAnchor.constraint(equalToConstant: 28),
+            settingsButton.heightAnchor.constraint(equalToConstant: 28),
 
             contentView.leadingAnchor.constraint(equalTo: rootView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: rootView.trailingAnchor),
