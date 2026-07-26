@@ -28,6 +28,8 @@
 	<string>public.app-category.business</string>
 	<key>NSHighResolutionCapable</key>
 	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright 2026 JP2 Creation. Tous droits reserves.</string>
 	<key>NSLocationUsageDescription</key>
 	<string>Martin Sols utilise ta position pour les fonctions terrain de l'application.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

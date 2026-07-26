@@ -39,6 +39,7 @@
 		60A100082DCA000000000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		60A100092DCA000000000001 /* opening-animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "opening-animation.gif"; path = "../../src/assets/opening-animation.gif"; sourceTree = SOURCE_ROOT; };
 		60A1000A2DCA000000000001 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		60A100142DCA000000000001 /* MacApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MacApp.entitlements; sourceTree = "<group>"; };
 		958DCC722DB07C7200EA8C5F /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = debug.xcconfig; path = ../debug.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -104,6 +105,7 @@
 				60A100062DCA000000000001 /* MacAppDelegate.swift */,
 				60A100082DCA000000000001 /* Assets.xcassets */,
 				60A100092DCA000000000001 /* opening-animation.gif */,
+				60A100142DCA000000000001 /* MacApp.entitlements */,
 				60A100072DCA000000000001 /* Info.plist */,
 			);
 			path = MacApp;
@@ -428,10 +430,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MacApp/MacApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = FAU35LT3YN;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = MacApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -440,7 +444,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.38;
-				PRODUCT_BUNDLE_IDENTIFIER = fr.martinsols.hub.mac;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.martinsols.hub;
 				PRODUCT_NAME = "Martin Sols";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -453,10 +457,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MacApp/MacApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 40;
 				DEVELOPMENT_TEAM = FAU35LT3YN;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = MacApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -465,7 +471,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.38;
-				PRODUCT_BUNDLE_IDENTIFIER = fr.martinsols.hub.mac;
+				PRODUCT_BUNDLE_IDENTIFIER = fr.martinsols.hub;
 				PRODUCT_NAME = "Martin Sols";
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
